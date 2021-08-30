@@ -24,7 +24,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private List<Task> taskList = new ArrayList<>();
-    private FloatingActionButton fab;
+
 
 
     @Override
@@ -32,7 +32,7 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-//        fab = requireView().findViewById(R.id.fab);
+
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -40,14 +40,6 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(FirstFragment.this)
-//                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-//            }
-//        });
     }
 
     @Override
