@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Saulo/GIT/Tasklist/app/src/main/res/drawable/ic_add_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/Saulo/GIT/Tasklist/app/src/main/res/layout/activity_input.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Saulo/GIT/Tasklist/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
         <entry key="..\:/Users/Saulo/GIT/Tasklist/app/src/main/res/layout/adapter_tasklist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Saulo/GIT/Tasklist/app/src/main/res/layout/content_main.xml" value="0.2046875" />

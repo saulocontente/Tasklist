@@ -1,5 +1,6 @@
 package com.aulaudemy.tasklist.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.aulaudemy.tasklist.R;
@@ -23,6 +24,8 @@ import com.aulaudemy.tasklist.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.zip.Inflater;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -45,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                Intent intentAddTask = new Intent(getApplicationContext(), InputActivity.class);
+                startActivity(intentAddTask);
             }
         });
     }
