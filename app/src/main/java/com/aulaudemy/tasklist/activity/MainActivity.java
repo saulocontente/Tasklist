@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentAddTask = new Intent(getApplicationContext(), InputActivity.class);
-                startActivity(intentAddTask);
+                Intent intentInputTask = new Intent(getApplicationContext(), InputActivity.class);
+                startActivity(intentInputTask);
             }
         });
     }

@@ -7,4 +7,5 @@
     <string name="add_button">Add</string>
 
     <string name="hello_first_fragment">Hello</string>
+    <string name="task_description">Inform your task description here</string>
 </resources>
