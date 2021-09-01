@@ -3,18 +3,18 @@ package com.aulaudemy.tasklist.model;
 import java.io.Serializable;
 
 public class Task implements Serializable {
-    protected int id;
+    protected Long id;
     protected String description;
     protected boolean status;
 
     public Task() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

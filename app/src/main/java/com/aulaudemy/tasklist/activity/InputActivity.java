@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.aulaudemy.tasklist.R;
 import com.aulaudemy.tasklist.databinding.ActivityInputBinding;
+import com.aulaudemy.tasklist.helper.TaskDAO;
 import com.aulaudemy.tasklist.model.Task;
 
 public class InputActivity extends AppCompatActivity {
@@ -31,22 +32,36 @@ public class InputActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.save_task:
-
                 String task_description = binding.inputTask.getText().toString();
+                TaskDAO taskDAO = new TaskDAO(getApplicationContext());
                 if(task_description.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Task description is empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Task description is empty",
+                            Toast.LENGTH_LONG
+                    ).show();
                 } else {
                     Task task = new Task();
-                    Toast.makeText(getApplicationContext(), "Saving...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Saving...",
+                            Toast.LENGTH_LONG
+                    ).show();
                     task.setDescription(task_description);
-                    finish();
+                    if (taskDAO.create(task)){
+                        finish();
+                    } else {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "An error has occurred",
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
                 }
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
