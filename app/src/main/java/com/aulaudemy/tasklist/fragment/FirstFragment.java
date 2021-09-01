@@ -26,7 +26,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     private List<Task> taskList = new ArrayList<>();
-
+    private static TaskDAO taskDAO;
 
 
     @Override
@@ -47,6 +47,7 @@ public class FirstFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        taskDAO = new TaskDAO(getContext());
         loadRecyclerTask();
         binding.recyclerViewTask.addOnItemTouchListener(new RecyclerClickListener(
                 getContext(),
@@ -60,15 +61,19 @@ public class FirstFragment extends Fragment {
 
                     @Override
                     public void onItemClick(View view, int position) {
-
+                        Task selectedTask = taskList.get(position);
+                        Intent intent = new Intent(getContext(), InputActivity.class);
+                        intent.putExtra("selectedTask", selectedTask);
+                        startActivity(intent);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
                         Task selectedTask = taskList.get(position);
-                        Intent intent = new Intent(getContext(), InputActivity.class);
-                        intent.putExtra("selectedTask", selectedTask);
-                        startActivity(intent);
+                        selectedTask.setStatus(true);
+                        if (taskDAO.update(selectedTask)) {
+                            loadRecyclerTask();
+                        }
                     }
                 }
         ));
@@ -81,10 +86,9 @@ public class FirstFragment extends Fragment {
     }
 
     public void loadRecyclerTask() {
-        TaskDAO taskDAO = new TaskDAO(getContext());
         taskList = taskDAO.read();
         AdapterTasklist adapter = new AdapterTasklist(taskList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireActivity().getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerViewTask.setLayoutManager(layoutManager);
         binding.recyclerViewTask.setAdapter(adapter);
         binding.recyclerViewTask.setHasFixedSize(true);

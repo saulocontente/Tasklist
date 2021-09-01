@@ -26,7 +26,6 @@ public class RecyclerClickListener implements RecyclerView.OnItemTouchListener {
             recyclerClickListener.onItemClick(
                     childView,
                     recyclerView.getChildAdapterPosition(childView)
-
             );
             return true;
         }

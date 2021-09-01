@@ -56,6 +56,7 @@ public class InputActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         ).show();
                         task.setDescription(task_description);
+                        task.setStatus(false);
                         if (taskDAO.create(task)){
                             finish();
                         } else {

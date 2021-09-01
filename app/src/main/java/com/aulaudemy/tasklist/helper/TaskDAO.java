@@ -26,6 +26,7 @@ public class TaskDAO implements iTaskDAO {
     public boolean create(Task task) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("description", task.getDescription());
+        contentValues.put("status", task.getStatus());
         try {
             write.insert(DBhelper.TABLE_TASKS, null,contentValues);
             Log.i("INFO.DB", "Success on saving item");
@@ -45,8 +46,10 @@ public class TaskDAO implements iTaskDAO {
             Task task = new Task();
             Long id = cursor.getLong(cursor.getColumnIndex("id"));
             String description = cursor.getString(cursor.getColumnIndex("description"));
+            Boolean status = (cursor.getInt(cursor.getColumnIndex("status")) == 1);
             task.setId(id);
             task.setDescription(description);
+            task.setStatus(status);
             taskList.add(task);
         }
         return taskList;
@@ -56,6 +59,7 @@ public class TaskDAO implements iTaskDAO {
     public boolean update(Task task) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("description", task.getDescription());
+        contentValues.put("status", task.getStatus());
         try {
             String[] args = {task.getId().toString()} ;
             write.update(
