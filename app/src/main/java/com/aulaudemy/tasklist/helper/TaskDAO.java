@@ -65,9 +65,9 @@ public class TaskDAO implements iTaskDAO {
                     args
             );
             Log.i("INFO.DB", "Success on update item");
-            return false;
         } catch (Exception exception) {
             Log.e("INFO.DB", "ERROR "+exception.getMessage()+" on update item");
+            return false;
         }
         return true;
     }

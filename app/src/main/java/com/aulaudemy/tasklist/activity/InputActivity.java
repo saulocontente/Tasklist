@@ -15,6 +15,7 @@ import com.aulaudemy.tasklist.model.Task;
 
 public class InputActivity extends AppCompatActivity {
     private ActivityInputBinding binding;
+    private Task currentTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,10 @@ public class InputActivity extends AppCompatActivity {
         binding = ActivityInputBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        currentTask = (Task) getIntent().getSerializableExtra("selectedTask");
+        if (currentTask != null) {
+            binding.inputTask.setText(currentTask.getDescription());
+        }
     }
 
     @Override
@@ -43,21 +48,39 @@ public class InputActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG
                     ).show();
                 } else {
-                    Task task = new Task();
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Saving...",
-                            Toast.LENGTH_LONG
-                    ).show();
-                    task.setDescription(task_description);
-                    if (taskDAO.create(task)){
-                        finish();
+                    if(currentTask == null) {
+                        Task task = new Task();
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "Saving...",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        task.setDescription(task_description);
+                        if (taskDAO.create(task)){
+                            finish();
+                        } else {
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "An error has occurred",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
                     } else {
                         Toast.makeText(
                                 getApplicationContext(),
-                                "An error has occurred",
-                                Toast.LENGTH_LONG
+                                "Updating...",
+                                Toast.LENGTH_SHORT
                         ).show();
+                        currentTask.setDescription(task_description);
+                        if (taskDAO.update(currentTask)) {
+                            finish();
+                        } else {
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "An error has occurred",
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
                     }
                 }
                 break;
